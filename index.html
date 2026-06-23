@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALBUM NAME PLACEHOLDER – Tennis Music</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Court lines background decoration -->
+  <div class="court-bg">
+    <div class="court-line court-baseline-top"></div>
+    <div class="court-line court-baseline-bottom"></div>
+    <div class="court-line court-service-left"></div>
+    <div class="court-line court-service-right"></div>
+    <div class="court-center-circle"></div>
+    <div class="court-net"></div>
+  </div>
+
+  <!-- Floating tennis balls decoration -->
+  <div class="ball-deco ball-deco--1"></div>
+  <div class="ball-deco ball-deco--2"></div>
+  <div class="ball-deco ball-deco--3"></div>
+
+  <main class="stage">
+
+    <!-- Album card -->
+    <article class="album-card">
+
+      <!-- Album art -->
+      <div class="album-art-wrap">
+        <div class="album-art">
+          <div class="album-art__inner">
+            <span class="album-art__label">ALBUM ART</span>
+          </div>
+          <!-- Spinning record lines -->
+          <div class="album-art__spin-ring ring-1"></div>
+          <div class="album-art__spin-ring ring-2"></div>
+        </div>
+        <div class="album-spin-shadow"></div>
+      </div>
+
+      <!-- Album info -->
+      <header class="album-header">
+        <p class="album-eyebrow">Full Album</p>
+        <h1 class="album-title">ALBUM NAME PLACEHOLDER</h1>
+        <p class="album-meta">5 Tracks &nbsp;·&nbsp; 2024</p>
+      </header>
+
+      <!-- Track list -->
+      <ol class="tracklist" id="tracklist">
+
+        <li class="track" data-index="0" data-src="song1-placeholder.mp3">
+          <button class="track__play-btn" aria-label="Play Track 1">
+            <span class="track__ball">
+              <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </span>
+          </button>
+          <div class="track__info">
+            <span class="track__num">01</span>
+            <span class="track__name">Song Title Placeholder 1</span>
+          </div>
+          <div class="track__waveform">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="track__duration" data-index="0">0:00</span>
+        </li>
+
+        <li class="track" data-index="1" data-src="song2-placeholder.mp3">
+          <button class="track__play-btn" aria-label="Play Track 2">
+            <span class="track__ball">
+              <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </span>
+          </button>
+          <div class="track__info">
+            <span class="track__num">02</span>
+            <span class="track__name">Song Title Placeholder 2</span>
+          </div>
+          <div class="track__waveform">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="track__duration" data-index="1">0:00</span>
+        </li>
+
+        <li class="track" data-index="2" data-src="song3-placeholder.mp3">
+          <button class="track__play-btn" aria-label="Play Track 3">
+            <span class="track__ball">
+              <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </span>
+          </button>
+          <div class="track__info">
+            <span class="track__num">03</span>
+            <span class="track__name">Song Title Placeholder 3</span>
+          </div>
+          <div class="track__waveform">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="track__duration" data-index="2">0:00</span>
+        </li>
+
+        <li class="track" data-index="3" data-src="song4-placeholder.mp3">
+          <button class="track__play-btn" aria-label="Play Track 4">
+            <span class="track__ball">
+              <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </span>
+          </button>
+          <div class="track__info">
+            <span class="track__num">04</span>
+            <span class="track__name">Song Title Placeholder 4</span>
+          </div>
+          <div class="track__waveform">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="track__duration" data-index="3">0:00</span>
+        </li>
+
+        <li class="track" data-index="4" data-src="song5-placeholder.mp3">
+          <button class="track__play-btn" aria-label="Play Track 5">
+            <span class="track__ball">
+              <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </span>
+          </button>
+          <div class="track__info">
+            <span class="track__num">05</span>
+            <span class="track__name">Song Title Placeholder 5</span>
+          </div>
+          <div class="track__waveform">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="track__duration" data-index="4">0:00</span>
+        </li>
+
+      </ol>
+
+      <!-- Global player controls -->
+      <div class="player" id="player">
+        <div class="player__now-playing">
+          <span class="player__now-label">NOW PLAYING</span>
+          <span class="player__now-title" id="now-title">–</span>
+        </div>
+
+        <div class="player__seek-wrap">
+          <span class="player__time" id="current-time">0:00</span>
+          <div class="player__track-bar" id="seek-bar">
+            <div class="player__track-fill" id="seek-fill"></div>
+            <div class="player__track-thumb" id="seek-thumb"></div>
+          </div>
+          <span class="player__time" id="total-time">0:00</span>
+        </div>
+
+        <div class="player__controls">
+          <button class="ctrl-btn ctrl-btn--prev" id="btn-prev" aria-label="Previous track">
+            <svg viewBox="0 0 24 24"><polygon points="19,20 9,12 19,4"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
+          </button>
+          <button class="ctrl-btn ctrl-btn--play-main" id="btn-main-play" aria-label="Play/Pause">
+            <span class="main-ball">
+              <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </span>
+          </button>
+          <button class="ctrl-btn ctrl-btn--next" id="btn-next" aria-label="Next track">
+            <svg viewBox="0 0 24 24"><polygon points="5,4 15,12 5,20"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
+          </button>
+        </div>
+
+        <div class="player__volume-wrap">
+          <svg class="vol-icon" viewBox="0 0 24 24"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14"/></svg>
+          <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Volume" />
+        </div>
+      </div>
+
+    </article>
+
+  </main>
+
+  <!-- Hidden audio element -->
+  <audio id="audio-player" preload="none"></audio>
+
+  <script>
+    const audio = document.getElementById('audio-player');
+    const tracks = document.querySelectorAll('.track');
+    const nowTitle = document.getElementById('now-title');
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
+    const seekFill = document.getElementById('seek-fill');
+    const seekThumb = document.getElementById('seek-thumb');
+    const seekBar = document.getElementById('seek-bar');
+    const btnMainPlay = document.getElementById('btn-main-play');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    let currentIndex = -1;
+
+    function fmt(s) {
+      if (isNaN(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60).toString().padStart(2, '0');
+      return `${m}:${sec}`;
+    }
+
+    function setActiveTrack(index) {
+      tracks.forEach((t, i) => {
+        t.classList.toggle('is-active', i === index);
+        const play = t.querySelector('.icon-play');
+        const pause = t.querySelector('.icon-pause');
+        if (i === index) {
+          play.classList.add('hidden');
+          pause.classList.remove('hidden');
+        } else {
+          play.classList.remove('hidden');
+          pause.classList.add('hidden');
+        }
+      });
+
+      const mainPlay = btnMainPlay.querySelector('.icon-play');
+      const mainPause = btnMainPlay.querySelector('.icon-pause');
+      mainPlay.classList.add('hidden');
+      mainPause.classList.remove('hidden');
+    }
+
+    function loadTrack(index) {
+      const track = tracks[index];
+      const src = track.dataset.src;
+      const name = track.querySelector('.track__name').textContent;
+
+      audio.src = src;
+      audio.load();
+      currentIndex = index;
+      nowTitle.textContent = name;
+      seekFill.style.width = '0%';
+      seekThumb.style.left = '0%';
+      currentTimeEl.textContent = '0:00';
+      totalTimeEl.textContent = '0:00';
+    }
+
+    function playTrack(index) {
+      loadTrack(index);
+      audio.play().catch(() => {});
+      setActiveTrack(index);
+    }
+
+    function pauseAll() {
+      audio.pause();
+      tracks.forEach(t => {
+        t.classList.remove('is-active');
+        t.querySelector('.icon-play').classList.remove('hidden');
+        t.querySelector('.icon-pause').classList.add('hidden');
+      });
+      btnMainPlay.querySelector('.icon-play').classList.remove('hidden');
+      btnMainPlay.querySelector('.icon-pause').classList.add('hidden');
+    }
+
+    tracks.forEach((track, i) => {
+      track.querySelector('.track__play-btn').addEventListener('click', () => {
+        if (currentIndex === i && !audio.paused) {
+          pauseAll();
+        } else if (currentIndex === i && audio.paused) {
+          audio.play().catch(() => {});
+          setActiveTrack(i);
+        } else {
+          playTrack(i);
+        }
+      });
+    });
+
+    btnMainPlay.addEventListener('click', () => {
+      if (currentIndex === -1) {
+        playTrack(0);
+        return;
+      }
+      if (audio.paused) {
+        audio.play().catch(() => {});
+        setActiveTrack(currentIndex);
+      } else {
+        pauseAll();
+      }
+    });
+
+    btnPrev.addEventListener('click', () => {
+      if (currentIndex <= 0) return;
+      playTrack(currentIndex - 1);
+    });
+
+    btnNext.addEventListener('click', () => {
+      if (currentIndex >= tracks.length - 1) return;
+      playTrack(currentIndex + 1);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      seekFill.style.width = pct + '%';
+      seekThumb.style.left = pct + '%';
+      currentTimeEl.textContent = fmt(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      totalTimeEl.textContent = fmt(audio.duration);
+      // Also update track duration badge
+      const dur = document.querySelector(`.track__duration[data-index="${currentIndex}"]`);
+      if (dur) dur.textContent = fmt(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      if (currentIndex < tracks.length - 1) {
+        playTrack(currentIndex + 1);
+      } else {
+        pauseAll();
+        seekFill.style.width = '0%';
+        seekThumb.style.left = '0%';
+        currentTimeEl.textContent = '0:00';
+      }
+    });
+
+    seekBar.addEventListener('click', (e) => {
+      const rect = seekBar.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      if (audio.duration) {
+        audio.currentTime = pct * audio.duration;
+      }
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = volumeSlider.value;
+    });
+
+    const albumArt = document.querySelector('.album-art');
+    audio.addEventListener('play',  () => albumArt.classList.add('spinning'));
+    audio.addEventListener('pause', () => albumArt.classList.remove('spinning'));
+    audio.addEventListener('ended', () => albumArt.classList.remove('spinning'));
+
+    // Click on track row (not the button) also triggers play
+    tracks.forEach((track, i) => {
+      track.addEventListener('click', (e) => {
+        if (e.target.closest('.track__play-btn')) return;
+        if (currentIndex === i && !audio.paused) {
+          pauseAll();
+        } else {
+          playTrack(i);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

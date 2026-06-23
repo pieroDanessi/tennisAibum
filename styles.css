@@ -1,0 +1,712 @@
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --clay:        #C2572B;   /* Roland-Garros clay */
+  --clay-dark:   #9E3E19;
+  --clay-light:  #E8825A;
+  --court-green: #3A7D44;
+  --court-line:  #F5F0DC;   /* off-white court marking */
+  --ball:        #C9E52F;   /* neon tennis-ball yellow-green */
+  --ball-dark:   #A8C41E;
+  --felt:        #7DC255;   /* softer felt green */
+  --chalk:       #FAF6EC;
+  --ink:         #1A1006;
+  --mid:         rgba(255,255,255,.12);
+
+  --radius-ball: 50%;
+  --radius-card: 20px;
+  --shadow-card: 0 32px 80px rgba(0,0,0,.45);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { height: 100%; }
+
+body {
+  min-height: 100%;
+  font-family: var(--font-body);
+  background: var(--clay-dark);
+  color: var(--chalk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.hidden { display: none !important; }
+
+/* ============================================================
+   COURT BACKGROUND
+   ============================================================ */
+.court-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.court-line {
+  position: absolute;
+  background: rgba(245,240,220,.18);
+}
+
+.court-baseline-top  { top: 8%;  left: 5%; right: 5%; height: 2px; }
+.court-baseline-bottom { bottom: 8%; left: 5%; right: 5%; height: 2px; }
+.court-service-left  { top: 8%; bottom: 8%; left: 5%;  width: 2px; }
+.court-service-right { top: 8%; bottom: 8%; right: 5%; width: 2px; }
+
+.court-net {
+  position: absolute;
+  top: 8%; bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(245,240,220,.35) 0px,
+    rgba(245,240,220,.35) 8px,
+    transparent 8px,
+    transparent 14px
+  );
+}
+
+.court-center-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(245,240,220,.15);
+}
+
+/* ============================================================
+   FLOATING BALL DECORATIONS
+   ============================================================ */
+.ball-deco {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 35% 35%, #dff542 0%, #c9e52f 55%, #a8c41e 100%);
+  box-shadow: inset -4px -4px 12px rgba(0,0,0,.25);
+  opacity: .55;
+  animation: floatBall 8s ease-in-out infinite;
+}
+
+/* Felt seam lines on decorative balls */
+.ball-deco::before,
+.ball-deco::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.35);
+}
+.ball-deco::before { inset: 18% 5% 18% 5%; transform: rotate(55deg); }
+.ball-deco::after  { inset: 5% 18% 5% 18%; transform: rotate(55deg); }
+
+.ball-deco--1 { width: 90px;  height: 90px;  top: 12%;  left: 6%;  animation-delay: 0s;    animation-duration: 9s; }
+.ball-deco--2 { width: 60px;  height: 60px;  bottom: 18%; right: 7%; animation-delay: 2.5s; animation-duration: 7s; }
+.ball-deco--3 { width: 130px; height: 130px; top: 55%;  left: 2%;  animation-delay: 1.2s; animation-duration: 11s; opacity: .3; }
+
+@keyframes floatBall {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(12deg); }
+  66%       { transform: translateY(10px) rotate(-8deg); }
+}
+
+/* ============================================================
+   STAGE
+   ============================================================ */
+.stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 48px 24px;
+}
+
+/* ============================================================
+   ALBUM CARD
+   ============================================================ */
+.album-card {
+  background: linear-gradient(160deg, #2b1206 0%, #1a0c04 100%);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  width: 100%;
+  max-width: 560px;
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle clay-colored glow behind card */
+.album-card::before {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(194,87,43,.35) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ============================================================
+   ALBUM ART
+   ============================================================ */
+.album-art-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.album-art {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 38%, #c9e52f 0%, #9ab51a 50%, #6a7f12 100%);
+  box-shadow:
+    0 0 0 6px rgba(201,229,47,.22),
+    0 12px 40px rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  animation: albumSpin 16s linear infinite;
+  animation-play-state: paused;
+}
+
+.album-art.spinning {
+  animation-play-state: running;
+}
+
+/* Felt seam marks on album art */
+.album-art__inner {
+  position: relative;
+  z-index: 2;
+  width: 56px; height: 56px;
+  background: rgba(26,12,4,.8);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.album-art__label {
+  font-size: 7px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.4);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Ring seam lines */
+.album-art__spin-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.25);
+  pointer-events: none;
+}
+
+.ring-1 {
+  inset: 20% 3% 20% 3%;
+  transform: rotate(55deg);
+}
+
+.ring-2 {
+  inset: 3% 20% 3% 20%;
+  transform: rotate(55deg);
+}
+
+.album-spin-shadow {
+  width: 120px; height: 12px;
+  background: radial-gradient(ellipse, rgba(0,0,0,.45) 0%, transparent 70%);
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+@keyframes albumSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   ALBUM HEADER
+   ============================================================ */
+.album-header {
+  text-align: center;
+}
+
+.album-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ball);
+  margin-bottom: 6px;
+}
+
+.album-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  letter-spacing: .04em;
+  color: var(--chalk);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.album-meta {
+  font-size: 13px;
+  color: rgba(250,246,236,.45);
+  letter-spacing: .06em;
+}
+
+/* ============================================================
+   TRACKLIST
+   ============================================================ */
+.tracklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    background .18s ease,
+    transform .15s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.track:hover {
+  background: rgba(201,229,47,.07);
+  border-color: rgba(201,229,47,.15);
+  transform: translateX(3px);
+}
+
+.track.is-active {
+  background: rgba(201,229,47,.1);
+  border-color: rgba(201,229,47,.28);
+}
+
+/* Tennis-ball play button */
+.track__play-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.track__ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 36%, #dff542 0%, #c9e52f 52%, #a8c41e 100%);
+  box-shadow:
+    inset -2px -2px 6px rgba(0,0,0,.28),
+    0 3px 10px rgba(201,229,47,.35);
+  position: relative;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.track__play-btn:hover .track__ball,
+.track__play-btn:focus-visible .track__ball {
+  transform: scale(1.12);
+  box-shadow:
+    inset -2px -2px 6px rgba(0,0,0,.28),
+    0 6px 18px rgba(201,229,47,.55);
+}
+
+/* Seam lines on each track ball */
+.track__ball::before,
+.track__ball::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.28);
+}
+.track__ball::before { clip-path: ellipse(30% 48% at 50% 50%); transform: rotate(55deg); }
+.track__ball::after  { clip-path: ellipse(48% 30% at 50% 50%); transform: rotate(55deg); }
+
+.track__ball svg {
+  width: 14px; height: 14px;
+  fill: #1a0c04;
+  stroke: none;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.track__info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.track__num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: rgba(250,246,236,.35);
+  font-variant-numeric: tabular-nums;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.track.is-active .track__num {
+  color: var(--ball);
+}
+
+.track__name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--chalk);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track.is-active .track__name {
+  color: var(--ball);
+}
+
+/* Animated waveform bars */
+.track__waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.track.is-active .track__waveform {
+  opacity: 1;
+}
+
+.track__waveform span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--ball);
+  animation: waveBar 1s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.track__waveform span:nth-child(1)  { height: 8px;  animation-delay: 0s;    }
+.track__waveform span:nth-child(2)  { height: 16px; animation-delay: .1s;   }
+.track__waveform span:nth-child(3)  { height: 10px; animation-delay: .2s;   }
+.track__waveform span:nth-child(4)  { height: 18px; animation-delay: .05s;  }
+.track__waveform span:nth-child(5)  { height: 12px; animation-delay: .15s;  }
+.track__waveform span:nth-child(6)  { height: 7px;  animation-delay: .25s;  }
+.track__waveform span:nth-child(7)  { height: 14px; animation-delay: .08s;  }
+.track__waveform span:nth-child(8)  { height: 20px; animation-delay: .18s;  }
+.track__waveform span:nth-child(9)  { height: 9px;  animation-delay: .12s;  }
+.track__waveform span:nth-child(10) { height: 15px; animation-delay: .22s;  }
+
+@keyframes waveBar {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(.3); }
+}
+
+.track__duration {
+  font-size: 12px;
+  color: rgba(250,246,236,.38);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   PLAYER CONTROLS
+   ============================================================ */
+.player {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.player__now-playing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.player__now-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: rgba(250,246,236,.35);
+  text-transform: uppercase;
+}
+
+.player__now-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--chalk);
+  letter-spacing: .01em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 340px;
+}
+
+/* Seek bar */
+.player__seek-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player__time {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(250,246,236,.45);
+  flex-shrink: 0;
+  width: 32px;
+}
+
+.player__track-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(255,255,255,.12);
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  transition: height .15s ease;
+}
+
+.player__track-bar:hover {
+  height: 7px;
+}
+
+.player__track-fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--ball-dark), var(--ball));
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.player__track-thumb {
+  position: absolute;
+  top: 50%; left: 0%;
+  transform: translate(-50%, -50%);
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--ball);
+  box-shadow: 0 0 8px rgba(201,229,47,.7);
+  pointer-events: none;
+  transition: width .1s, height .1s;
+}
+
+.player__track-bar:hover .player__track-thumb {
+  width: 16px; height: 16px;
+}
+
+/* Main control buttons */
+.player__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(250,246,236,.65);
+  transition: color .15s ease, transform .15s ease;
+}
+
+.ctrl-btn svg {
+  width: 22px; height: 22px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.ctrl-btn:hover {
+  color: var(--chalk);
+  transform: scale(1.15);
+}
+
+/* Big tennis-ball play/pause button */
+.ctrl-btn--play-main {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.main-ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 36%, #dff542 0%, #c9e52f 52%, #a8c41e 100%);
+  box-shadow:
+    inset -3px -3px 10px rgba(0,0,0,.3),
+    0 0 0 4px rgba(201,229,47,.18),
+    0 8px 24px rgba(201,229,47,.45);
+  transition: transform .15s ease, box-shadow .15s ease;
+  position: relative;
+}
+
+/* Seam lines on main ball */
+.main-ball::before,
+.main-ball::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.28);
+}
+.main-ball::before { clip-path: ellipse(28% 48% at 50% 50%); transform: rotate(55deg); }
+.main-ball::after  { clip-path: ellipse(48% 28% at 50% 50%); transform: rotate(55deg); }
+
+.ctrl-btn--play-main:hover .main-ball {
+  transform: scale(1.1);
+  box-shadow:
+    inset -3px -3px 10px rgba(0,0,0,.3),
+    0 0 0 6px rgba(201,229,47,.25),
+    0 12px 32px rgba(201,229,47,.6);
+}
+
+.main-ball svg {
+  width: 22px; height: 22px;
+  fill: #1a0c04;
+  stroke: none;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Volume control */
+.player__volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vol-icon {
+  width: 18px; height: 18px;
+  fill: none;
+  stroke: rgba(250,246,236,.45);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.volume-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: rgba(255,255,255,.12);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--ball);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(201,229,47,.6);
+  transition: transform .12s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--ball);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 6px rgba(201,229,47,.6);
+}
+
+/* ============================================================
+   ALBUM ART SPIN WHEN PLAYING
+   ============================================================ */
+
+/* JS adds .spinning class to .album-art; handled in script fallback below */
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .album-card {
+    padding: 28px 18px 24px;
+    gap: 20px;
+  }
+
+  .track__waveform { display: none; }
+
+  .track {
+    gap: 10px;
+    padding: 10px 10px;
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITY — reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ball-deco,
+  .album-art,
+  .track__waveform span {
+    animation: none;
+  }
+}
